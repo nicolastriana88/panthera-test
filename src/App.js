@@ -1,23 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import PostsList from './components/PostsList';
+import PostForm from './components/PostForm';
 
-function App() {
+const App = () => {
+  const [posts, setPosts] = useState([
+    { title: 'Post 1', content: 'This is the content of post 1.' },
+    { title: 'Post 2', content: 'This is the content of post 2.' },
+  ]);
+
+  const handleAddPost = (newPost) => {
+    setPosts([...posts, newPost]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PostForm onAddPost={handleAddPost} />
+      <PostsList posts={posts} />
     </div>
   );
 }
